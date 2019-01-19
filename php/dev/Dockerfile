@@ -1,4 +1,4 @@
-FROM ppimarketing/base:php
+FROM cbjdev/php:base
 
 COPY entrypoint.sh /usr/local/bin/
 
