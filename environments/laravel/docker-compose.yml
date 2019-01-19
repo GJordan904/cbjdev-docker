@@ -1,0 +1,68 @@
+# Example Container Configuration for Laravel App
+# Running PHP, NGINX, Mysql, and Redis
+version: "3"
+
+networks:
+  frontend:
+    driver: ${NETWORK_DRIVER}
+  backend:
+    driver: ${NETWORK_DRIVER}
+volumes:
+  redis_data:
+  mysql_data:
+services:
+  ### PHP ##############################################
+  php:
+    restart: always
+    image: cbjdev/php:dev
+    volumes:
+      - ${APP_CODE_HOST}:/var/www
+      - /var/www/node_modules/
+    ports:
+      - "9000"
+    networks:
+      - backend
+
+  ### NGINX Server #########################################
+  nginx:
+    restart: always
+    image: cbjdev/nginx:dev
+    volumes:
+      - ${APP_CODE_HOST}/public:/var/www/public
+      - ${APP_CODE_HOST}/docker/nginx/conf.d/upstream.conf:/etc/nginx/conf.d/upstream.conf
+      - ${DATA_PATH_HOST}/log/nginx:/var/log/nginx
+    ports:
+      - "${HTTP_PORT_HOST}:80"
+    networks:
+      - frontend
+      - backend
+
+  ### MySQL ################################################
+  mysql:
+    restart: always
+    image: cbjdev/mysql:base
+    environment:
+      - MYSQL_PORT=${DB_PORT}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_HOST=${DB_ROOT_HOST}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    volumes:
+      - ${DB_DUMP_DIR}/${DB_DUMP_FILE}:/docker-entrypoint-initdb.d/${DB_DUMP_FILE}
+      - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+    ports:
+      - "${DB_HOST_PORT}:${DB_PORT}"
+    networks:
+      - backend
+
+  ### Redis ################################################
+  redis:
+    restart: always
+    image: cbjdev/redis:base
+    volumes:
+      - redis_data:/data
+    ports:
+      - "${REDIS_PORT}:6379"
+    networks:
+      - backend
