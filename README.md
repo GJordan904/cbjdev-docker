@@ -12,6 +12,6 @@ these as necessary to fit your needs. Some variables that may need changed are m
 ### .env Variables
  * **DB_DUMP_DIR & DB_DUMP_FILE**: These point to a .sql file to create and
  populate a db
- * **HTTP_PORT_HOST & DB_HOST_PORT**: These map the ports on the host to the nginx and mysql 
+ * **HTTP_PORT_HOST & DB_HOST_PORT & REDIS_PORT**: These map the ports on the host to the nginx and mysql 
  containers. The defaults are fine if nothing is already using them
 
