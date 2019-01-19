@@ -1,4 +1,4 @@
-FROM ppimarketing/base:nginx
+FROM cbjdev/nginx:dev
 
 COPY sites /etc/nginx/sites-available/
 
