@@ -2,7 +2,7 @@
 ### [Docker Hub Repositories](https://hub.docker.com/u/cbjdev)
 
 ## Running a Laravel App in Development
-In the environment/laravel directory are the required files to get started.
+In the **environment/laravel** directory are the required files to get started.
 
 1. Copy the docker directory and the docker-compose.yml file into the root 
 of the app.
