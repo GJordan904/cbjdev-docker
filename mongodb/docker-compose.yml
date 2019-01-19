@@ -1,0 +1,7 @@
+version: 3
+
+services:
+  base:
+    image: cbjdev/mongodb:base
+      build:
+        context: ./base

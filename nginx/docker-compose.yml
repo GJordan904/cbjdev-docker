@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  base:
+    image: cbjdev/nginx:base
+    build:
+      context: ./base
+  dev:
+    image: cbjdev/nginx:dev
+    build:
+      context: ./dev

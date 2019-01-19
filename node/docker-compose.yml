@@ -1,0 +1,7 @@
+version: 3
+
+services:
+  base:
+    image: cbjdev/node:dev
+      build:
+        context: ./dev

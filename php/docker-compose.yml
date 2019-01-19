@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  base:
+    image: cbjdev/php:base
+    build:
+      context: ./base
+  dev:
+    image: cbjdev/php:dev
+    build:
+      context: ./dev

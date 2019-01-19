@@ -1,0 +1,7 @@
+version: 3
+
+services:
+  base:
+    image: cbjdev/redis:base
+      build:
+        context: ./base
