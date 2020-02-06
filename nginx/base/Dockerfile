@@ -1,17 +1,15 @@
 FROM nginx:alpine
 
-VOLUME /data
-
 RUN apk update \
-    && apk upgrade \
-    && apk add --no-cache bash \
-    && adduser -D -H -u 1000 -s /bin/bash www-data
+  && apk upgrade \
+  && mkdir -p /data/cache
 
-COPY nginx.conf /etc/nginx/
+COPY nginx.conf mime.types /etc/nginx/
 COPY conf.d/* /etc/nginx/conf.d/
+COPY sites-available/* /etc/nginx/sites-available/
 
-WORKDIR /var/www
+RUN nginx -c /etc/nginx/nginx.conf -t
 
 CMD ["nginx"]
 
-EXPOSE 80
+EXPOSE 80 8080
