@@ -9,3 +9,13 @@ services:
     image: cbjdev/php:dev
     build:
       context: ./dev
+  app:
+    image: cbjdev/php:app
+    build:
+      dockerfile: app.Dockerfile
+      context: ./prod
+  worker:
+    image: cbjdev/php:worker
+    build:
+      dockerfile: worker.Dockerfile
+      context: ./prod

@@ -1,9 +1,9 @@
-FROM cbjdev/nginx:dev
+FROM cbjdev/nginx:base
 
-COPY sites /etc/nginx/sites-available/
+COPY sites-available/* /etc/nginx/sites-available/
 
 WORKDIR /var/www
 
 CMD ["nginx"]
 
-EXPOSE 80
+EXPOSE 80 8080
